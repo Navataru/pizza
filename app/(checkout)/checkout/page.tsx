@@ -61,9 +61,9 @@ export default function CheckoutPage() {
         icon: '✅',
       });
 
-      if (url) {
-        location.href = url;
-      }
+      // if (url) {
+      //   location.href = url;
+      // }
     } catch (err) {
       console.log(err);
       setSubmitting(false);

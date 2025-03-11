@@ -98,19 +98,19 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    const paymentUrl = paymentData.confirmation.confirmation_url;
+    //const paymentUrl = paymentData.confirmation.confirmation_url;
 
-    await sendEmail(
-      data.email,
-      'Next Pizza / Оплатите заказ #' + order.id,
-      PayOrderTemplate({
-        orderId: order.id,
-        totalAmount: order.totalAmount,
-        paymentUrl,
-      }),
-    );
+    // await sendEmail(
+    //   data.email,
+    //   'Next Pizza / Оплатите заказ #' + order.id,
+    //   PayOrderTemplate({
+    //     orderId: order.id,
+    //     totalAmount: order.totalAmount,
+    //     paymentUrl,
+    //   }),
+    // );
 
-    return paymentUrl;
+    //return paymentUrl;
   } catch (err) {
     console.log('[CreateOrder] Server error', err);
   }
@@ -154,13 +154,13 @@ export async function registerUser(body: Prisma.UserCreateInput) {
       },
     });
 
-    if (user) {
-      if (!user.verified) {
-        throw new Error('Почта не подтверждена');
-      }
-
-      throw new Error('Пользователь уже существует');
-    }
+    // if (user) {
+    //   if (!user.verified) {
+    //     throw new Error('Почта не подтверждена');
+    //   }
+    //
+    //   throw new Error('Пользователь уже существует');
+    // }
 
     const createdUser = await prisma.user.create({
       data: {
@@ -170,22 +170,22 @@ export async function registerUser(body: Prisma.UserCreateInput) {
       },
     });
 
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    // const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    await prisma.verificationCode.create({
-      data: {
-        code,
-        userId: createdUser.id,
-      },
-    });
+    // await prisma.verificationCode.create({
+    //   data: {
+    //     code,
+    //     userId: createdUser.id,
+    //   },
+    // });
 
-    await sendEmail(
-      createdUser.email,
-      'Next Pizza / 📝 Подтверждение регистрации',
-      VerificationUserTemplate({
-        code,
-      }),
-    );
+    // await sendEmail(
+    //   createdUser.email,
+    //   'Next Pizza / 📝 Подтверждение регистрации',
+    //   VerificationUserTemplate({
+    //     code,
+    //   }),
+    // );
   } catch (err) {
     console.log('Error [CREATE_USER]', err);
     throw err;
