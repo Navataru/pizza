@@ -1,5 +1,4 @@
 'use server';
-
 import { prisma } from '@/prisma/prisma-client';
 import { PayOrderTemplate } from '@/shared/components';
 import { VerificationUserTemplate } from '@/shared/components/shared/email-temapltes/verification-user';
